@@ -5,10 +5,10 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Node.js](https://nodejs.org/en/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Express](https://expressjs.com/pt-br/)
-- [Typeorm]
-- [PostgreSQL]
-- [Dotenv]
-- [Bcryptjs]
+- [Typeorm](https://github.com/typeorm/typeorm)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Bcryptjs](https://www.npmjs.com/package/bcryptjs?activeTab=readme)
 - [JSONWebToken](https://github.com/auth0/node-jsonwebtoken#readme)
 
 ## 💻 Projeto
