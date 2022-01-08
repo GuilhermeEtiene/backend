@@ -4,17 +4,17 @@ import { UserRepositories } from '@repositories/UserRepositories'
 interface CreateUserRequest {
   user: string
   email: string
-  password_hash: string
+  password: string
 }
 
 class CreateUserService {
-  async execute({ user, email, password_hash }: CreateUserRequest) {
+  async execute({ user, email, password }: CreateUserRequest) {
     const userRepository = getCustomRepository(UserRepositories)
 
     const userCreated = userRepository.create({
       user,
       email,
-      password_hash
+      password_hash: password
     })
 
     await userRepository.save(userCreated)
