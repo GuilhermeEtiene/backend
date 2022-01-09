@@ -1,36 +1,37 @@
 import { getCustomRepository } from 'typeorm'
-import { UserRepositories } from '@repositories/UserRepositories'
-import { ValidatePasswordService } from '@services/User/ValidatePasswordService'
+import { UsersRepositories } from '@repositories/UsersRepositories'
+import { AppError } from '../../errors/AppError'
+import { ValidatePasswordService } from './ValidatePasswordService'
 
 interface CreateUserRequest {
-  user: string
-  email: string
-  password: string
+    user: string
+    email: string
+    password: string
 }
 
 class CreateUserService {
-  async execute({ user, email, password }: CreateUserRequest) {
-    const userRepository = getCustomRepository(UserRepositories)
+  async execute ({ user, email, password }: CreateUserRequest) {
+    const usersRepository = getCustomRepository(UsersRepositories)
 
-    const userAlreadyExists = await userRepository.findOne({
+    const userAlreadyExists = await usersRepository.findOne({
       user
     })
 
-    if(userAlreadyExists) throw new Error('Usuário  já existe')
+    const validatePasswordService = new ValidatePasswordService()
 
-    const validadePasswordService = new ValidatePasswordService()
-
-    const passwordHash = await validadePasswordService.execute({
+    const passwordHash = await validatePasswordService.execute({
       password
     })
 
-    const userCreated = userRepository.create({
+    if (userAlreadyExists) throw new AppError('Usuário já existe')
+
+    const userCreated = usersRepository.create({
       user,
       email,
       password_hash: passwordHash
     })
 
-    await userRepository.save(userCreated)
+    await usersRepository.save(userCreated)
 
     return userCreated
   }

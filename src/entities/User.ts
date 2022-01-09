@@ -6,34 +6,34 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 
- @Entity('users')
-  class User {
-  @PrimaryGeneratedColumn('increment')
-  id: number
+@Entity('users')
+class User {
+     @PrimaryGeneratedColumn('increment')
+    id: number
 
-  @Column({ unique: true })
-  user: string
+    @Column({ unique: true })
+    user: string 
 
-  @Column()
-  email: string
+    @Column()
+    email: string
 
-  @Column({ select: false })
-  password_hash: string
+    @Column({ select: false })
+    password_hash: string
 
-  @Column({ default: true })
-  is_active: Boolean
+    @Column({ default: true })
+    is_active: Boolean
 
-  @CreateDateColumn()
-  created_at: Date
+    @CreateDateColumn()
+    created_at: Date
 
-  @UpdateDateColumn()
-  updated_at: Date
+    @UpdateDateColumn()
+    updated_at: Date
 
-  constructor() {
-    if (!this.is_active) {
-      this.is_active = true
+    constructor () {
+      if (!this.is_active) {
+        this.is_active = true
+      }
     }
-  }
 }
 
 export { User }

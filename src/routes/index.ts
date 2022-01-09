@@ -1,7 +1,5 @@
 import { router as UserRoutes } from './UserRoutes'
 
-export default
-
-[
+export default [
   UserRoutes
 ]

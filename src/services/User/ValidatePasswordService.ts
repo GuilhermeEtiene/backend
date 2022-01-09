@@ -1,21 +1,19 @@
-import { EncryptPasswordService } from '@services/User/EncryptPasswordService'
+import { AppError } from '../../errors/AppError'
+import { EncryptPasswordService } from './EncryptPasswordService'
 
 interface ValidatePasswordRequest {
-  password: string
+    password: string
 }
 
 class ValidatePasswordService {
-  async execute({ password }: ValidatePasswordRequest) {
-    if(password.length < 6 ) throw new Error('A senha deve ter no mínimo 6 caracteres')
+  async execute ({ password }: ValidatePasswordRequest) {
+    if (password.length < 6) throw new AppError('A senha deve ter no mínimo 6 caracteres.')
 
     const encryptPasswordService = new EncryptPasswordService()
 
-    const passwordHash = encryptPasswordService.execute({
-      password
-    })
+    const passwordHash = await encryptPasswordService.execute({ password })
 
     return passwordHash
-
   }
 }
 
